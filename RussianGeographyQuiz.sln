@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RussianGeographyQuiz", "RussianGeographyQuiz\RussianGeographyQuiz.csproj", "{2935EDCF-9F13-4E77-87E1-4E75DC0B152C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2935EDCF-9F13-4E77-87E1-4E75DC0B152C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2935EDCF-9F13-4E77-87E1-4E75DC0B152C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2935EDCF-9F13-4E77-87E1-4E75DC0B152C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2935EDCF-9F13-4E77-87E1-4E75DC0B152C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1550BD47-1ED1-47FC-B83D-D9EF6C8359FB}
+	EndGlobalSection
+EndGlobal

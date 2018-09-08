@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RussianGeographyQuiz.Windows;
+using RussianGeographyQuiz.Windows.Subjects;
 
 namespace RussianGeographyQuiz
 {
@@ -20,9 +22,32 @@ namespace RussianGeographyQuiz
     /// </summary>
     public partial class MainWindow : Window
     {
+        FederalDistrictsTestWindow federalDistrictsTestWindow { get; set; }
+        MainSubjectsWindow mainSubjectsWindow { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            var tag = button.Tag;
+            switch (tag)
+            {
+                case "show tests on federal districts of Russia":
+                    federalDistrictsTestWindow = new FederalDistrictsTestWindow();
+                    federalDistrictsTestWindow.ShowDialog();
+                    break;
+                case "show tests on subjects of Russia":
+                    mainSubjectsWindow = new MainSubjectsWindow();
+                    mainSubjectsWindow.ShowDialog();
+                    break;
+                case "exit":
+                    Close();
+                    break;
+            }
         }
     }
 }

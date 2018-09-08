@@ -1,0 +1,35 @@
+﻿<Window x:Class="RussianGeographyQuiz.Windows.Subjects.SubjectsByFederalDistrictWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RussianGeographyQuiz.Windows.Subjects"
+        mc:Ignorable="d"
+        Title="Субъекты по федеральным округам" MinHeight="550" Height="550" MinWidth="550" Width="550" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold">Тесты по субъектам отдельных федеральных округов</TextBlock>
+        <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15">Выбери федеральный округ:</TextBlock>
+        <Button Grid.Row="2" FontSize="15" Click="Button_Click" Tag="show tests on subjects in Central federal district">Центральный</Button>
+        <Button Grid.Row="3" FontSize="15" Click="Button_Click" Tag="show tests on subjects in Northwest federal district">Северо-западный</Button>
+        <Button Grid.Row="4" FontSize="15" Click="Button_Click" Tag="show tests on subjects in Volga federal district">Приволжский</Button>
+        <Button Grid.Row="5" FontSize="15" Click="Button_Click" Tag="show tests on subjects in South federal district">Южный</Button>
+        <Button Grid.Row="6" FontSize="15" Click="Button_Click" Tag="show tests on subjects in North Caucasus federal district">Северо-кавказский</Button>
+        <Button Grid.Row="7" FontSize="15" Click="Button_Click" Tag="show tests on subjects in Ural federal district">Уральский</Button>
+        <Button Grid.Row="8" FontSize="15" Click="Button_Click" Tag="show tests on subjects in Siberia federal district">Сибирский</Button>
+        <Button Grid.Row="9" FontSize="15" Click="Button_Click" Tag="show tests on subjects in Far East federal district">Дальневосточный</Button>
+        <Button Grid.Row="10" VerticalAlignment="Center" HorizontalAlignment="Center" Height="35" Width="140" FontSize="15" Click="Button_Click" Tag="close">Назад</Button>
+    </Grid>
+</Window>

@@ -5,8 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RussianGeographyQuiz"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Главное окно" MinHeight="350" Height="350" MinWidth="300" Width="300" WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold">Тесты по географии России</TextBlock>
+        <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15">Выбери тест:</TextBlock>
+        <Button Grid.Row="2" FontSize="15" Click="Button_Click" Tag="show tests on federal districts of Russia">Федеральные округа</Button>
+        <Button Grid.Row="3" FontSize="15" Click="Button_Click" Tag="show tests on subjects of Russia">Субъекты</Button>
+        <Button Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center" Height="35" Width="140" FontSize="15" Click="Button_Click" Tag="exit">Выйти</Button>
+
     </Grid>
 </Window>

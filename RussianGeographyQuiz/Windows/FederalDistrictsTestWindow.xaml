@@ -32,7 +32,7 @@
                     <Path MouseDown="Path_MouseDown" Fill="Transparent" Width="37.6052" Height="34.2232" Canvas.Left="34.3989" Canvas.Top="217.919" Stretch="Fill" StrokeLineJoin="Round" Stroke="#FF000000" Data="F1 M 54.0047,220.819C 47.5103,220.819 37.8834,221.139 35.6031,227.22C 32.7505,234.827 39.0898,244.272 45.2039,249.622C 48.4214,252.437 54.0019,251.923 58.005,250.422C 62.1909,248.852 68.5881,250.303 70.8061,246.421C 74.0741,240.702 65.0628,234.277 60.4052,229.62C 59.5619,228.777 58.362,228.309 57.2049,228.02C 56.17,227.761 54.759,228.774 54.0047,228.02C 51.7105,225.726 53.1914,221.566 52.4045,218.419"/>
                     <TextBlock Canvas.Left="22" TextWrapping="Wrap" Canvas.Top="197" Name="TestTextBlock"/>
                 </Canvas>-->
-                <Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="FederalDistricts" Width="960.083" Height="553.648" Clip="F1 M 0,0L 960.083,0L 960.083,553.648L 0,553.648L 0,0" UseLayoutRounding="False">
+                <Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="theCanvas" Width="960.083" Height="553.648" Clip="F1 M 0,0L 960.083,0L 960.083,553.648L 0,553.648L 0,0" UseLayoutRounding="False">
                     <Image Source="C:\Users\ribog_000\Documents\ProgrammingStuff\C#\RussianGeographyQuiz\RussianGeographyQuiz\Resources\FederalDistricts.png" Width="1200" Height="692" Canvas.Left="0" Canvas.Top="0">
                         <Image.RenderTransform>
                             <TransformGroup>
@@ -107,6 +107,14 @@
                     <Path Tag="Far_East" MouseDown="Path_MouseDown" Fill="Transparent" x:Name="Medny_island" Width="4.60712" Height="3.62518" Canvas.Left="936.009" Canvas.Top="176.881" Stretch="Fill" StrokeLineJoin="Round" Stroke="Transparent" Data="F1 M 939.676,177.382C 939.532,177.369 939.416,177.514 939.275,177.549C 938.821,177.663 938.414,177.918 937.975,178.082C 937.515,178.255 936.962,178.342 936.642,178.716C 936.374,179.029 936.532,179.87 936.942,179.916C 937.273,179.953 937.611,179.912 937.942,179.949C 938.373,179.997 938.854,180.076 939.242,179.882C 939.598,179.704 939.664,179.205 939.842,178.849C 940.005,178.523 940.203,178.123 940.076,177.782C 940.009,177.606 939.863,177.399 939.676,177.382 Z "/>
                     <Path Tag="Far_East" MouseDown="Path_MouseDown" Fill="Transparent" x:Name="Karaginsky_island" Width="5.20197" Height="12.3433" Canvas.Left="877.637" Canvas.Top="169.878" Stretch="Fill" StrokeLineJoin="Round" Stroke="Transparent" Data="F1 M 881.221,170.515C 881.156,170.398 880.954,170.482 880.82,170.482C 880.598,170.482 880.376,170.448 880.154,170.448C 879.975,170.448 879.798,170.359 879.62,170.382C 879.244,170.429 878.857,170.554 878.554,170.782C 878.315,170.961 878.191,171.286 878.154,171.582C 878.071,172.246 878.32,172.913 878.32,173.582C 878.32,173.852 878.22,174.114 878.187,174.382C 878.126,174.872 878.214,175.387 878.387,175.849C 878.602,176.423 879.288,176.684 879.687,177.149C 879.884,177.379 880.014,177.665 880.12,177.949C 880.199,178.158 880.133,178.399 880.187,178.616C 880.222,178.756 880.319,178.876 880.354,179.016C 880.408,179.232 880.32,179.46 880.32,179.682C 880.32,180.235 880.394,180.863 880.754,181.283C 880.977,181.543 881.347,181.758 881.687,181.716C 882.025,181.674 882.238,181.246 882.321,180.916C 882.386,180.656 882.254,180.383 882.254,180.116C 882.254,179.194 881.635,178.364 881.521,177.449C 881.481,177.135 881.576,176.811 881.687,176.515C 881.757,176.329 881.954,176.181 881.954,175.982C 881.954,175.303 882.138,174.622 882.054,173.949C 881.98,173.355 881.732,172.796 881.587,172.215C 881.476,171.771 881.365,171.326 881.254,170.882C 881.224,170.763 881.28,170.622 881.221,170.515 Z "/>
                     <Path Tag="Far_East" MouseDown="Path_MouseDown" Fill="Transparent" x:Name="Bolshoy_Shantar_Island" Width="5.95447" Height="6.32611" Canvas.Left="797.243" Canvas.Top="342.307" Stretch="Fill" StrokeLineJoin="Round" Stroke="Transparent" Data="F1 M 802.694,345.407C 802.71,345.34 802.674,345.269 802.644,345.207C 802.606,345.133 802.538,345.078 802.494,345.007C 802.366,344.803 802.275,344.565 802.094,344.407C 801.913,344.249 801.65,344.19 801.494,344.007C 801.06,343.501 800.56,342.807 799.893,342.807C 799.55,342.807 799.185,342.875 798.893,343.057C 798.531,343.283 798.32,343.695 798.093,344.057C 797.939,344.304 797.743,344.566 797.743,344.857C 797.743,345.391 797.91,345.927 797.843,346.457C 797.794,346.854 797.664,347.3 797.843,347.657C 798.084,348.139 798.86,348.174 799.393,348.107C 799.779,348.059 800.064,347.713 800.394,347.507C 800.723,347.301 801.098,347.16 801.394,346.907C 801.7,346.645 801.909,346.285 802.144,345.957C 802.192,345.889 802.285,345.866 802.344,345.807C 802.469,345.682 802.652,345.579 802.694,345.407 Z "/>
+                    <TextBlock Tag="Northwest" Canvas.Left="185" TextWrapping="Wrap" Canvas.Top="266" Text="Северо-Западный" FontWeight="Bold" Visibility="Hidden"/>
+                    <TextBlock Tag="Central" Canvas.Left="96" TextWrapping="Wrap" Canvas.Top="314" Text="Центральный" FontWeight="Bold" Visibility="Hidden"/>
+                    <TextBlock Tag="South" Canvas.Left="74" TextWrapping="Wrap" Text="Южный" Canvas.Top="407" FontWeight="Bold" Visibility="Hidden"/>
+                    <TextBlock Tag="North_Caucasus" Canvas.Left="43" TextWrapping="Wrap" Text="Северо-Кавказский" Canvas.Top="513" FontWeight="Bold" Visibility="Hidden"/>
+                    <TextBlock Tag="Volga" Canvas.Left="160" TextWrapping="Wrap" Text="Приволжский" Canvas.Top="374" FontWeight="Bold" Visibility="Hidden"/>
+                    <TextBlock Tag="Ural" Canvas.Left="326" TextWrapping="Wrap" Text="Уральский" Canvas.Top="342" FontWeight="Bold" Visibility="Hidden"/>
+                    <TextBlock Tag="Siberia" Canvas.Left="490" TextWrapping="Wrap" Text="Сибирский" Canvas.Top="428" FontWeight="Bold" Visibility="Hidden"/>
+                    <TextBlock Tag="Far_East" Canvas.Left="653" TextWrapping="Wrap" Text="Дальневосточный" Canvas.Top="259" FontWeight="Bold" Visibility="Hidden"/>
                 </Canvas>
             </Grid>
 
@@ -117,16 +125,16 @@
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15">Осталось: 8/8</TextBlock>
-                <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15">Счет: 0/8</TextBlock>
+                <TextBlock Name="RegionsLeftTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15">Осталось: 8/8</TextBlock>
+                <TextBlock Name="ScoreTextBlock" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15">Счет: 0/8</TextBlock>
                 <TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15">Время:</TextBlock>
                 <Grid Grid.Row="3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
-                    <Button Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Width="40" Height="40">||</Button>
+                    <TextBlock Name="TimerTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
+                    <Button Click="Button_Click" Tag="PauseButton" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Width="40" Height="40">||</Button>
                 </Grid>
             </Grid>
         </Grid>
@@ -135,8 +143,8 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Width="150" Height="30">Начать/сдаться</Button>
-            <Button Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Width="150" Height="30" Click="Button_Click">Выход</Button>
+            <Button Click="Button_Click" Tag="StartGiveUpButton" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Width="150" Height="30">Начать/сдаться</Button>
+            <Button  Click="Button_Click" Tag="ExitButton" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Width="150" Height="30">Выход</Button>
         </Grid>
     </Grid>
 </Window>

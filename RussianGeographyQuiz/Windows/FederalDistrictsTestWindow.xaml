@@ -14,7 +14,7 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold">Тест по федеральным округам РФ</TextBlock>
-        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15">Регион:</TextBlock>
+        <TextBlock Name="SubheaderTextBox" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15">Найти:</TextBlock>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="4*"/>

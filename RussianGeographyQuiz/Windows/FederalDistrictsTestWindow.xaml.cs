@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using RussianGeographyQuiz.Classes;
 
 namespace RussianGeographyQuiz.Windows
 {
@@ -19,11 +20,21 @@ namespace RussianGeographyQuiz.Windows
     /// </summary>
     public partial class FederalDistrictsTestWindow : Window
     {
-        double gridWidth;
+        GameSession gameSession;
         public FederalDistrictsTestWindow()
         {
             InitializeComponent();
-            gridWidth = TestingGrid.Width;
+            List<TerritorialObject> federalDistrictsList = new List<TerritorialObject> {
+                new TerritorialObject("Центральный","Central"),
+                new TerritorialObject("Южный","South"),
+                new TerritorialObject("Северо-Западный","Northwest"),
+                new TerritorialObject("Дальневосточный","Far_East"),
+                new TerritorialObject("Сибирский","Siberia"),
+                new TerritorialObject("Уральский","Ural"),
+                new TerritorialObject("Приволжский","Volga"),
+                new TerritorialObject("Северо-Кавказский","North_Caucasus")
+                };
+            gameSession = new GameSession(federalDistrictsList);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -32,42 +43,83 @@ namespace RussianGeographyQuiz.Windows
             switch (button.Tag)
             {
                 case "PauseButton":
+                    if (gameSession.GameOnFlag == true)
+                        MessageBox.Show("Пауза");
+                    //Приостановка таймера здесь
+                    else
+                        MessageBox.Show("Пауза возможна только во время игры");
+                    //Вместо вывода сообщения кнопка паузы должна появляться только во время игры
                     break;
-                case "StartgiveUpButton":
-                    break;
+                case "StartGiveUpButton":
+                    if (gameSession.GameOnFlag == false)
+                    {
+                        gameSession.GameOnFlag = true;
+                        SubheaderTextBox.Text = "Найти: " + gameSession.ItemsToFind[gameSession.CurrentNumberOfItemToFind].RussianName;
+                    }
+                        break;
                 case "ExitButton":
+                    Close();
                     break;
             }
         }
-
+        
         private void Path_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            var senderPath = sender as Path;
-            var senderPathTag = senderPath.Tag as string;
-            foreach (var item in theCanvas.Children)
+            if (gameSession.GameOnFlag == true)
             {
-                var itemAsPath = item as Path;
-                if (itemAsPath != null)//Если это действительно path
-                {
-                    var itemAsPathTag = itemAsPath.Tag as string;
-                    if (itemAsPathTag == senderPathTag)
+                var senderPath = sender as Path;
+                var senderPathTag = senderPath.Tag as string;
+                if (senderPathTag == gameSession.ItemsToFind[gameSession.CurrentNumberOfItemToFind].EnglishName)
+                    foreach (var item in theCanvas.Children)
                     {
-                        itemAsPath.Fill = Brushes.LightGreen;
-                        itemAsPath.Stroke = Brushes.Black;
+                        var itemAsPath = item as Path;
+                        if (itemAsPath != null)//Если это действительно path
+                        {
+                            var itemAsPathTag = itemAsPath.Tag as string;
+                            if (itemAsPathTag == senderPathTag)
+                            {
+                                itemAsPath.Fill = Brushes.LightGreen;
+                                itemAsPath.Stroke = Brushes.Black;
+                            }
+                        }
+                        var itemAsTextBlock = item as TextBlock;
+                        if (itemAsTextBlock != null)
+                        {
+                            var itemAsTextBlockTag = itemAsTextBlock.Tag as string;
+                            if (itemAsTextBlockTag == senderPathTag)
+                            {
+                                itemAsTextBlock.Visibility = Visibility.Visible;
+                            }
+                        }
                     }
-                }
-                var itemAsTextBlock = item as TextBlock;
-                if (itemAsTextBlock != null)
-                {
-                    var itemAsTextBlockTag = itemAsTextBlock.Tag as string;
-                    if (itemAsTextBlockTag == senderPathTag)
+                else
+                    foreach (var item in theCanvas.Children)
                     {
-                        itemAsTextBlock.Visibility = Visibility.Visible;
+                        var itemAsPath = item as Path;
+                        if (itemAsPath != null)//Если это действительно path
+                        {
+                            var itemAsPathTag = itemAsPath.Tag as string;
+                            if (itemAsPathTag == gameSession.ItemsToFind[gameSession.CurrentNumberOfItemToFind].EnglishName)
+                            {
+                                itemAsPath.Fill = Brushes.Red;
+                                itemAsPath.Stroke = Brushes.Black;
+                            }
+                        }
+                        var itemAsTextBlock = item as TextBlock;
+                        if (itemAsTextBlock != null)
+                        {
+                            var itemAsTextBlockTag = itemAsTextBlock.Tag as string;
+                            if (itemAsTextBlockTag == gameSession.ItemsToFind[gameSession.CurrentNumberOfItemToFind].EnglishName)
+                            {
+                                itemAsTextBlock.Visibility = Visibility.Visible;
+                            }
+                        }
                     }
-                }
+                gameSession.CurrentNumberOfItemToFind++;
+                SubheaderTextBox.Text = "Найти: " + gameSession.ItemsToFind[gameSession.CurrentNumberOfItemToFind].RussianName;
             }
-            
-            //TestTextBlock.Text = "penis";
+
         }
     }
 }
+

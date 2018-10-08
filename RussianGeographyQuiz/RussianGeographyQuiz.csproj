@@ -54,6 +54,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\GameSession.cs" />
+    <Compile Include="Classes\TerritorialObject.cs" />
     <Compile Include="Windows\FederalDistrictsTestWindow.xaml.cs">
       <DependentUpon>FederalDistrictsTestWindow.xaml</DependentUpon>
     </Compile>

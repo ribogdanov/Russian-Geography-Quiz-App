@@ -1,0 +1,26 @@
+﻿<Window x:Class="RussianGeographyQuiz.Windows.GameOverDialogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RussianGeographyQuiz.Windows"
+        mc:Ignorable="d"
+        Title="Игра окончена" MinHeight="180" Height="180" MinWidth="400" Width="300" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15">Игра окончена. Что делать дальше?</TextBlock>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button VerticalAlignment="Center" HorizontalAlignment="Center" Height="35" Width="100" FontSize="15" IsDefault="True" Tag="Repeat" Click="Button_Click">Повторить</Button>
+            <Button Grid.Column="1" HorizontalAlignment="Center" Height="35" Width="100" FontSize="15" IsCancel="True" Tag="Exit" Click="Button_Click">Выйти</Button>
+            <Button Grid.Column="2" HorizontalAlignment="Center" Height="35" Width="100" FontSize="15" Tag="Stay" Click="Button_Click">Остаться</Button>
+        </Grid>
+    </Grid>
+</Window>

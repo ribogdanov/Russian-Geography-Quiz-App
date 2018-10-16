@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using RussianGeographyQuiz.Classes;
 
 namespace RussianGeographyQuiz.Windows
@@ -36,7 +37,7 @@ namespace RussianGeographyQuiz.Windows
                 new TerritorialObject("Приволжский","Volga"),
                 new TerritorialObject("Северо-Кавказский","North_Caucasus")
                 };
-            gameSession = new GameSession(federalDistrictsList);
+            gameSession = new GameSession();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -45,12 +46,10 @@ namespace RussianGeographyQuiz.Windows
             switch (button.Tag)
             {
                 case "PauseButton":
-                    if (gameSession.GameOnFlag == true)
-                        MessageBox.Show("Пауза");
+                    gameSession.DispatcherTimer.Stop();
+                    MessageBox.Show("Пауза");
+                    gameSession.DispatcherTimer.Start();
                     //Приостановка таймера здесь
-                    else
-                        MessageBox.Show("Пауза возможна только во время игры");
-                    //Вместо вывода сообщения кнопка паузы должна появляться только во время игры
                     break;
                 case "StartGiveUpButton":
                     if (gameSession.GameOnFlag == false)
@@ -59,7 +58,7 @@ namespace RussianGeographyQuiz.Windows
                     }
                     else
                     {
-                        ShowGameOverDialog();
+                        GameOver();
                     }
                     break;
                 case "ExitButton":
@@ -96,18 +95,19 @@ namespace RussianGeographyQuiz.Windows
                             {
                                 gameSession.CurrentNumberOfItemToFind++;
                                 SubheaderTextBox.Text = "Найти: " + gameSession.ItemsToFind[gameSession.CurrentNumberOfItemToFind].RussianName;
+                                RegionsLeftTextBlock.Text = $"Осталось: {gameSession.TotalNumberOfItemsToFind-gameSession.CurrentNumberOfItemToFind}";
+                                ScoreTextBlock.Text = $"Счет: {gameSession.CurrentCountOfCorrectAnswers}/{gameSession.TotalNumberOfItemsToFind}";
                             }
                             else
                             {
                                 //Элементы для поиска закончились
-                                ShowGameOverDialog();
+                                RegionsLeftTextBlock.Text = $"Осталось: 0";
+                                ScoreTextBlock.Text = $"Счет: {gameSession.CurrentCountOfCorrectAnswers}/{gameSession.TotalNumberOfItemsToFind}";
+                                GameOver();
                             }
                         }
                 }
-
-                
             }
-
         }
 
         private void GameOverDialogWindow_RepeatButtonClicked(object sender, EventArgs e)
@@ -123,6 +123,7 @@ namespace RussianGeographyQuiz.Windows
         {
             SubheaderTextBox.Text = "Наблюдение результатов последней игры";
             gameSession.GameOnFlag = false;
+            PauseButton.IsEnabled = false;
         }
 
         private void Cleanup()
@@ -144,9 +145,11 @@ namespace RussianGeographyQuiz.Windows
             }
         }
 
-        private void ShowGameOverDialog()
+        private void GameOver()
         {
             StartGiveUpButton.Content = "Начать";
+            gameSession.DispatcherTimer.Stop();
+            //Вызов диалога завершения игры:
             gameOverDialogWindow = new GameOverDialogWindow();
             gameOverDialogWindow.RepeatButtonClicked += GameOverDialogWindow_RepeatButtonClicked;
             gameOverDialogWindow.ExitButtonClicked += GameOverDialogWindow_ExitButtonClicked;
@@ -157,11 +160,16 @@ namespace RussianGeographyQuiz.Windows
         private void StartGameSession()
         {
             StartGiveUpButton.Content = "Сдаться";
-            gameSession = new GameSession(federalDistrictsList);
+            gameSession = new GameSession(federalDistrictsList, TimerTextBlock);
             gameSession.GameOnFlag = true;
             SubheaderTextBox.Text = "Найти: " + gameSession.ItemsToFind[gameSession.CurrentNumberOfItemToFind].RussianName;
             Cleanup();
+            PauseButton.IsEnabled = true;
+            RegionsLeftTextBlock.Text = $"Осталось: {gameSession.TotalNumberOfItemsToFind}";
+            ScoreTextBlock.Text = $"Счет: {gameSession.CurrentCountOfCorrectAnswers}/{gameSession.TotalNumberOfItemsToFind}";
         }
+
+        
 
         private void MarkPathAsSelectedCorrectly()
         {
@@ -187,6 +195,7 @@ namespace RussianGeographyQuiz.Windows
                     }
                 }
             }
+            gameSession.CurrentCountOfCorrectAnswers++;
         }
 
         private void MarkPathAsSelectedIncorrectly()

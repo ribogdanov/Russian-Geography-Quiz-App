@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace RussianGeographyQuiz.Classes
 {
@@ -13,6 +15,9 @@ namespace RussianGeographyQuiz.Classes
         public int CurrentCountOfCorrectAnswers { get; set; }
         public bool GameOnFlag { get; set; }
         public List<TerritorialObject> ItemsToFind { get; set; }
+        public DispatcherTimer DispatcherTimer { get; set; }
+        public TimeSpan DisplayedTimer { get; set; }
+        public TextBlock TimerTextBlock { get; set; }
 
         private List<TerritorialObject> Randomizer(List<TerritorialObject> itemsToFind)
         {
@@ -42,13 +47,33 @@ namespace RussianGeographyQuiz.Classes
             return buffer;
         }
 
-        public GameSession(List<TerritorialObject> itemsToFind)
+        public GameSession()
+        {
+            GameOnFlag = false;
+        }
+
+        public GameSession(List<TerritorialObject> itemsToFind, TextBlock timerTextBlock)
         {
             CurrentNumberOfItemToFind = 0;
             CurrentCountOfCorrectAnswers = 0;
             GameOnFlag = false;
             ItemsToFind = Randomizer(itemsToFind);
-            TotalNumberOfItemsToFind = ItemsToFind.Count();            
+            TotalNumberOfItemsToFind = ItemsToFind.Count();
+            TimerTextBlock = timerTextBlock;
+
+            //Запуск таймера:
+            DispatcherTimer = new DispatcherTimer();
+            DispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            DispatcherTimer.Interval = new TimeSpan(days: 0, hours: 0, minutes: 0, seconds: 1);
+            DispatcherTimer.Start();
+            DisplayedTimer = new TimeSpan(days: 0, hours: 0, minutes: 0, seconds: 0);
+            TimerTextBlock.Text = DisplayedTimer.ToString();
+        }
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            DisplayedTimer += DispatcherTimer.Interval;
+            TimerTextBlock.Text = DisplayedTimer.ToString();
         }
     }
 }

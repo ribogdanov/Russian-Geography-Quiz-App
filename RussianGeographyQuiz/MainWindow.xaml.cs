@@ -38,11 +38,15 @@ namespace RussianGeographyQuiz
             {
                 case "show tests on federal districts of Russia":
                     federalDistrictsTestWindow = new FederalDistrictsTestWindow();
+                    Visibility = Visibility.Hidden;
                     federalDistrictsTestWindow.ShowDialog();
+                    Visibility = Visibility.Visible;
                     break;
                 case "show tests on subjects of Russia":
                     mainSubjectsWindow = new MainSubjectsWindow();
+                    Visibility = Visibility.Hidden;
                     mainSubjectsWindow.ShowDialog();
+                    Visibility = Visibility.Visible;
                     break;
                 case "exit":
                     Close();

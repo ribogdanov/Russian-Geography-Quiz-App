@@ -78,6 +78,7 @@ namespace RussianGeographyQuiz.Windows
                 {
                     //Пользователь нажал на некоторый объект Path, ищем соответствующий ему объект Territorial Object в gameSession.ItemsToFind:
                     if (item.EnglishName == senderPathTag)
+                    {
                         //Проверяем, происходило ли до этого взаимодействие с этим объектом TerritorialObject:
                         if (item.IfClicked == false)
                         {
@@ -95,7 +96,7 @@ namespace RussianGeographyQuiz.Windows
                             {
                                 gameSession.CurrentNumberOfItemToFind++;
                                 SubheaderTextBox.Text = "Найти: " + gameSession.ItemsToFind[gameSession.CurrentNumberOfItemToFind].RussianName;
-                                RegionsLeftTextBlock.Text = $"Осталось: {gameSession.TotalNumberOfItemsToFind-gameSession.CurrentNumberOfItemToFind}";
+                                RegionsLeftTextBlock.Text = $"Осталось: {gameSession.TotalNumberOfItemsToFind - gameSession.CurrentNumberOfItemToFind}";
                                 ScoreTextBlock.Text = $"Счет: {gameSession.CurrentCountOfCorrectAnswers}/{gameSession.TotalNumberOfItemsToFind}";
                             }
                             else
@@ -106,6 +107,8 @@ namespace RussianGeographyQuiz.Windows
                                 GameOver();
                             }
                         }
+                        //break;
+                    }
                 }
             }
         }
@@ -160,6 +163,10 @@ namespace RussianGeographyQuiz.Windows
         private void StartGameSession()
         {
             StartGiveUpButton.Content = "Сдаться";
+            foreach (var item in federalDistrictsList)
+            {
+                item.IfClicked = false;
+            }
             gameSession = new GameSession(federalDistrictsList, TimerTextBlock);
             gameSession.GameOnFlag = true;
             SubheaderTextBox.Text = "Найти: " + gameSession.ItemsToFind[gameSession.CurrentNumberOfItemToFind].RussianName;
@@ -169,7 +176,7 @@ namespace RussianGeographyQuiz.Windows
             ScoreTextBlock.Text = $"Счет: {gameSession.CurrentCountOfCorrectAnswers}/{gameSession.TotalNumberOfItemsToFind}";
         }
 
-        
+
 
         private void MarkPathAsSelectedCorrectly()
         {
@@ -208,7 +215,7 @@ namespace RussianGeographyQuiz.Windows
                     var itemAsPathTag = itemAsPath.Tag as string;
                     if (itemAsPathTag == gameSession.ItemsToFind[gameSession.CurrentNumberOfItemToFind].EnglishName)
                     {
-                        itemAsPath.Fill = Brushes.Red;
+                        itemAsPath.Fill = Brushes.Tomato;
                         itemAsPath.Stroke = Brushes.Black;
                     }
                 }
@@ -219,6 +226,76 @@ namespace RussianGeographyQuiz.Windows
                     if (itemAsTextBlockTag == gameSession.ItemsToFind[gameSession.CurrentNumberOfItemToFind].EnglishName)
                     {
                         itemAsTextBlock.Visibility = Visibility.Visible;
+                    }
+                }
+            }
+        }
+
+        private void Path_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (gameSession.GameOnFlag == true)
+            {
+                var senderPath = sender as Path;
+                var senderPathTag = senderPath.Tag as string;
+                foreach (var item in gameSession.ItemsToFind)
+                {
+                    //Ищем соответствующий TerritorialObject в ItemsToFind
+                    if (item.EnglishName == senderPathTag)
+                    //Для найденного объекта проверяем, было ли с ним взаимодействие:
+                    {
+                        if (item.IfClicked == false)
+                        {
+                            //Если взаимодействия не было, при наведении мыши все path, относящиеся к объекту, выделяются:
+                            foreach (var innerItem in theCanvas.Children)
+                            {
+                                var itemAsPath = innerItem as Path;
+                                if (itemAsPath != null)//Если это действительно path
+                                {
+                                    var itemAsPathTag = itemAsPath.Tag as string;
+                                    if (itemAsPathTag == senderPathTag)
+                                    {
+                                        itemAsPath.Stroke = Brushes.Black;
+                                        itemAsPath.Fill = Brushes.AliceBlue;
+                                    }
+                                }
+                            }
+                        }
+                        //break;
+                    }
+                }
+            }
+        }
+
+        private void Path_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (gameSession.GameOnFlag == true)
+            {
+                var senderPath = sender as Path;
+                var senderPathTag = senderPath.Tag as string;
+                foreach (var item in gameSession.ItemsToFind)
+                {
+                    //Ищем соответствующий TerritorialObject в ItemsToFind
+                    if (item.EnglishName == senderPathTag)
+                    //Для найденного объекта проверяем, было ли с ним взаимодействие:
+                    {
+                        if (item.IfClicked == false)
+                        {
+                            //Если взаимодействия не было, при выводе мыши за границы объекта со всех path, относящихся к объекту, снимается выделение:
+                            foreach (var innerItem in theCanvas.Children)
+                            {
+                                var itemAsPath = innerItem as Path;
+                                if (itemAsPath != null)//Если это действительно path
+                                {
+                                    var itemAsPathTag = itemAsPath.Tag as string;
+                                    if (itemAsPathTag == senderPathTag)
+                                    {
+                                        itemAsPath.Stroke = Brushes.Transparent;
+                                        itemAsPath.Fill = Brushes.Transparent;
+                                    }
+                                }
+                            }
+                        }
+                        //break;
                     }
                 }
             }

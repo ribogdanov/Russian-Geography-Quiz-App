@@ -21,22 +21,15 @@ namespace RussianGeographyQuiz.Windows
     /// </summary>
     public partial class FederalDistrictsTestWindow : Window
     {
-        List<TerritorialObject> federalDistrictsList;
+        List<TerritorialObject> itemsToFindSource;
         GameSession gameSession;
         GameOverDialogWindow gameOverDialogWindow;
         public FederalDistrictsTestWindow()
         {
             InitializeComponent();
-            federalDistrictsList = new List<TerritorialObject> {
-                new TerritorialObject("Центральный","Central"),
-                new TerritorialObject("Южный","South"),
-                new TerritorialObject("Северо-Западный","Northwest"),
-                new TerritorialObject("Дальневосточный","Far_East"),
-                new TerritorialObject("Сибирский","Siberia"),
-                new TerritorialObject("Уральский","Ural"),
-                new TerritorialObject("Приволжский","Volga"),
-                new TerritorialObject("Северо-Кавказский","North_Caucasus")
-                };
+
+            var sourceReader = new SourceReader();
+            itemsToFindSource = sourceReader.Read("FederalDistrictsSource.txt");
             gameSession = new GameSession();
         }
 
@@ -163,11 +156,11 @@ namespace RussianGeographyQuiz.Windows
         private void StartGameSession()
         {
             StartGiveUpButton.Content = "Сдаться";
-            foreach (var item in federalDistrictsList)
+            foreach (var item in itemsToFindSource)
             {
                 item.IfClicked = false;
             }
-            gameSession = new GameSession(federalDistrictsList, TimerTextBlock);
+            gameSession = new GameSession(itemsToFindSource, TimerTextBlock);
             gameSession.GameOnFlag = true;
             SubheaderTextBox.Text = "Найти: " + gameSession.ItemsToFind[gameSession.CurrentNumberOfItemToFind].RussianName;
             Cleanup();
@@ -295,11 +288,11 @@ namespace RussianGeographyQuiz.Windows
                                 }
                             }
                         }
-                        //break;
                     }
                 }
             }
         }
+        
     }
 }
 
